@@ -10,7 +10,7 @@ int main(void)
     unsigned int count0 = 0;
     unsigned int count1 = 0;
     // TODO: Declare the variables that main uses to interact with your state machine.
-    unsigned char buttonhistory = 0x00;
+    unsigned char buttonhistory = 0x10;
     bool reset = false;
 
     // Stops the Watchdog timer.
@@ -44,9 +44,9 @@ int main(void)
         // TODO: If Timer1 has expired, update the button history from the pushbutton value.
         // YOU MUST WRITE timer1expired IN myTimer.c
         int time1 = timer1Expired();
-        unsigned char status = checkStatus_LaunchpadS1();
         if(time1 == 1)
         {
+            unsigned char status = checkStatus_LaunchpadS1();
           buttonhistory = (buttonhistory << 1) + status;
         }
 
@@ -56,7 +56,7 @@ int main(void)
         bool pressed = fsmBoosterpackButtonS1(buttonhistory);
 
         // TODO: If a completed, debounced button press has occurred, increment count1.
-        if (buttonhistory == PRESSED)
+        if (pressed == 1)
         {
             ++count1;
         }

@@ -48,12 +48,20 @@ void initGPIO()
     P2OUT = P2OUT & ~BIT1;
     P2OUT = P2OUT & ~BIT0;
     P2OUT = P2OUT & ~BIT2;
+    P2OUT = P2OUT & ~BIT4;
 }
 
 // TODO: Create a function to return the status of Launchpad Pushbutton S1
 unsigned char checkStatus_LaunchpadS1()
 {
-    return ((P1IN & (1 << BIT1)) == (1 << BIT1));
+    if ((P1IN & BIT1) == 0)
+    {
+        return 1;
+    }
+    if ((P1IN & BIT1) == 1)
+    {
+       return 0;
+    }
 }
 
 // TODO: Create a function to return the status of Launchpad Pushbutton S2
