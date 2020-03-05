@@ -4,6 +4,8 @@
 #include "myTimer.h"
 typedef enum
 {SX, S1, S2, S3, S4, S5, S6, S7} hw3;
+typedef enum
+{S1B, S2B} Buttons;
 int main(void)
 {
     // Count variables to control the LEDs.
@@ -46,7 +48,7 @@ int main(void)
         int time1 = timer1Expired();
         if(time1 == 1)
         {
-            unsigned char status = checkStatus_LaunchpadS1();
+            unsigned char status = checkStatus_BoosterpackS1();
           buttonhistory = (buttonhistory << 1) + status;
         }
 
@@ -56,12 +58,21 @@ int main(void)
         bool pressed = fsmBoosterpackButtonS1(buttonhistory);
 
         // TODO: If a completed, debounced button press has occurred, increment count1.
-        if (pressed == 1)
+        static Buttons currentState = S1;
+        switch (currentState)
         {
-            ++count1;
+        case S1B:
+            if (pressed == 1)
+            {
+                ++count1;
+                currentState = S2B;
+            }
+        case S2B:
+            if(pressed == 0)
+            {
+                currentState = S1B;
+            }
         }
-
-
     }
 }
 
