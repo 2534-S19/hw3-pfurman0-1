@@ -67,7 +67,14 @@ unsigned char checkStatus_LaunchpadS1()
 // TODO: Create a function to return the status of Launchpad Pushbutton S2
 unsigned char checkStatus_LaunchpadS2()
 {
-    return (P1DIR >> BIT4) & 1;
+    if ((P1IN & BIT4) == 0)
+    {
+        return 1;
+    }
+    if ((P1IN & BIT4) == 1)
+    {
+       return 0;
+    }
 }
 
 // TODO: Create a function to return the status of Boosterpack Pushbutton S1
@@ -86,7 +93,14 @@ unsigned char checkStatus_BoosterpackS1()
 // TODO: Create a function to return the status of Boosterpack Pushbutton S2
 unsigned char checkStatus_BoosterpackS2()
 {
-    return (P3DIR >> BIT5) & 1;
+    if ((P3IN & BIT5) == 0)
+    {
+        return 1;
+    }
+    if ((P3IN & BIT5) == 1)
+    {
+       return 0;
+    }
 }
 
 // TODO: Create a function to turn on Launchpad LED1.

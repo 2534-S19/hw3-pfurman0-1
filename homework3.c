@@ -6,6 +6,10 @@ typedef enum
 {SX, S1, S2, S3, S4, S5, S6, S7} hw3;
 typedef enum
 {S1B, S2B} Buttons;
+/* ECE-2534 HW3
+ * Code by: Paul Furman
+ * No unauthorized source was used in the making of this code
+ */
 int main(void)
 {
     // Count variables to control the LEDs.
@@ -13,8 +17,6 @@ int main(void)
     unsigned int count1 = 0;
     // TODO: Declare the variables that main uses to interact with your state machine.
     unsigned char buttonhistory = 0x10;
-    bool reset = false;
-
     // Stops the Watchdog timer.
     initBoard();
     // Initialize the GPIO.
@@ -48,7 +50,7 @@ int main(void)
         int time1 = timer1Expired();
         if(time1 == 1)
         {
-            unsigned char status = checkStatus_BoosterpackS1();
+          unsigned char status = checkStatus_BoosterpackS1();
           buttonhistory = (buttonhistory << 1) + status;
         }
 
@@ -67,11 +69,13 @@ int main(void)
                 ++count1;
                 currentState = S2B;
             }
+            break;
         case S2B:
             if(pressed == 0)
             {
                 currentState = S1B;
             }
+            break;
         }
     }
 }
