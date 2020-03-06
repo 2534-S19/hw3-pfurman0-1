@@ -60,7 +60,7 @@ int main(void)
         bool pressed = fsmBoosterpackButtonS1(buttonhistory);
 
         // TODO: If a completed, debounced button press has occurred, increment count1.
-        static Buttons currentState = S1;
+        static Buttons currentState = S1B;
         switch (currentState)
         {
         case S1B:
@@ -154,7 +154,7 @@ void changeLaunchpadLED2(unsigned int count)
             turnOff_LaunchpadLED2Red();
             turnOff_LaunchpadLED2Green();
             turnOff_LaunchpadLED2Blue();
-            currentState=SX;;
+            currentState=SX;
         }
         break;
     }
